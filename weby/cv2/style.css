@@ -1,0 +1,13 @@
+ul {
+  list-style: armenian;
+}
+
+li {
+  margin-bottom: 0.5em;
+  color: brown;
+}
+
+.fancy {
+  font-family: cursive;
+  color: purple;
+}

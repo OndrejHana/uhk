@@ -1,0 +1,27 @@
+body {
+  background-color: black;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: white;
+}
+
+a:link {
+  background-color: #cccccc;
+}
+
+h1 {
+  font-family: 'Times New Roman', Times, serif;
+  color: #cccccc;
+}
+
+.news {
+  color: red;
+  font-style: italic;
+}
+
+a:link:hover {
+  cursor: wait;
+}
+
