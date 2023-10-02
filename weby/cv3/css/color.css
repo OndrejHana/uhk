@@ -1,0 +1,46 @@
+/* set font to sans */
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.fakulta-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+
+.fakulta-btn {
+  text-decoration: none;
+  color: black;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.fakulta-btn:hover {
+  box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+}
+
+#ff {
+  background-color: #90BC39;
+}
+
+#fim {
+  background-color: #469DD9;
+}
+
+#pdf {
+  background-color: #BD2759;
+}
+
+#prf {
+  background-color: #F2A73B;
+}
