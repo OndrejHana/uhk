@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,7 +39,7 @@ public class ObchodImpl {
             var line = buffReader.readLine();
 
             while (!(line = buffReader.readLine()).isBlank()) {
-                var p = new Produkt(line);
+                var p = new Produkt(line, ',');
                 this.pridejDoNabidky(p);
 
             }

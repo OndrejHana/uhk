@@ -1,7 +1,4 @@
 public class Zbozi {
-    enum Jednotka {
-        kg,ks,l
-    };
 
     String nazev;
     String zkratka;

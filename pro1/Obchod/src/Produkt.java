@@ -2,7 +2,6 @@ public class Produkt {
     Zbozi zbozi;
     int kod;
     Vyrobce vyrobce;
-
     double kvantita;
 
     public Produkt(String line, char sep) {
