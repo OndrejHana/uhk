@@ -62,6 +62,27 @@ public class Array {
         return el;
     }
 
+    public int indexOf(int val) {
+
+        for (int i = 0; i < this.length; i++) {
+            if (this.data[i] == val) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int lastIndexOf(int val) {
+        for (int i = this.length; i >= 0; i--) {
+            if (this.data[i] == val) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     @Override
     public String toString() {
         var temp = "len: " + this.length + ", capacity: " + this.capacity + ", elements: ";

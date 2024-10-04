@@ -5,16 +5,15 @@ public class Main {
         var now = System.nanoTime();
 
         var ar = new Array(10);
-        for (int i = 0; i < 100; i++) {
-            ar.insert(0, i);
+        for (int i = 12; i < 100; i++) {
+            ar.add(i);
         }
 
         System.out.println((System.nanoTime() - now) / 1.0E+6);
 
-        System.out.println(ar.remove(50));
-        System.out.println(ar.remove(52));
-        System.out.println(ar.remove(54));
-        System.out.println(ar.remove(95));
+        System.out.println(ar.indexOf(30));
+        System.out.println(ar.indexOf(0));
+        System.out.println(ar.indexOf(10));
 
 
 //        var ar = new Array();

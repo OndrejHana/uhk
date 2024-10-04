@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Canvas {
@@ -23,6 +25,15 @@ public class Canvas {
             }
         };
 
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println( e.getX() + " " + e.getY() );
+                drawPixelOnPoint(e.getX(), e.getY());
+
+            }
+        });
+
         frame.add(panel, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
@@ -38,6 +49,10 @@ public class Canvas {
         var g = img.getGraphics();
         g.setColor(new Color(0xFF000000, true));
         g.fillRect(0, 0, img.getWidth(), img.getHeight());
+    }
+
+    public void drawPixelOnPoint(int x, int y) {
+        img.setRGB(x,y, 0xFFFFFF);
     }
 
     public void drawLine(int x1, int x2, int y1, int y2) {
@@ -58,28 +73,11 @@ public class Canvas {
 
     }
 
-    public void drawCircle(int x, int y, int r) {
-
-    }
-
     public void draw() {
         clear();
 
         img.setRGB(5, 5 , 0xFFFFFF);
 
-//        drawLine(10, 110, 10, 110);
-//        drawLine(55, 55, 10, 110);
-//        drawLine(10, 110, 55, 55);
-//        drawLine(10, 110, 110, 10);
-
-        drawLine(50, 400, 50, 400);
-        drawLine(50, 50, 50, 400);
-//        for (int x = 10; x < 100; x++) {
-//            img.setRGB(x, 55, 0xFFFFFF);
-//            img.setRGB(55, x, 0xFFFF00);
-//            img.setRGB(x, x, 0xFF0000);
-//            img.setRGB(110-x, x, 0x0000FF);
-//        }
     }
 
     public void start() {
