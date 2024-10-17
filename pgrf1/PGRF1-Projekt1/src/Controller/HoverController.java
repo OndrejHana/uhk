@@ -4,14 +4,13 @@ import Model.Line;
 import Model.Mode;
 import View.Panel;
 import Model.Point;
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HoverController {
-    private Controller2D controller;
+    private final Controller2D controller;
     private boolean draw;
     private boolean snap;
 
@@ -60,7 +59,6 @@ public class HoverController {
                 if (snap) {
                     var dx = Math.abs(l.getX() - temp.getX());
                     var dy = Math.abs(l.getY() - temp.getY());
-                    var d = Math.abs(dx - dy);
 
                     if (dx < dy) {
                         temp.setX(l.getX());

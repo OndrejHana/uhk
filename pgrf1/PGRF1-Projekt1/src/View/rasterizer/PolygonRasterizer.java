@@ -3,12 +3,11 @@ package View.rasterizer;
 
 import Model.Line;
 import Model.Polygon;
-import View.Panel;
 
 import java.awt.*;
 
 public class PolygonRasterizer {
-    private LineRasterizer lineRasterizer;
+    private final LineRasterizer lineRasterizer;
     private Color color;
     private int thickness = 1;
 
@@ -54,5 +53,13 @@ public class PolygonRasterizer {
             lineRasterizer.rasterize(new Line(a, b, thickness));
         }
 
+    }
+
+    public int getThickness() {
+        return thickness;
+    }
+
+    public void setThickness(int thickness) {
+        this.thickness = thickness;
     }
 }

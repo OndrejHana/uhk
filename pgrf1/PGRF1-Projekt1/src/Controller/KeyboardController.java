@@ -7,7 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyboardController {
-    private Controller2D controller;
+    private final Controller2D controller;
 
     public KeyboardController(Controller2D controller) {
         this.controller = controller;

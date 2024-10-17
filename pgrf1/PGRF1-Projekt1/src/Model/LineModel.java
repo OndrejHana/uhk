@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class LineModel {
-    private ArrayList<Line> lines;
+    private final ArrayList<Line> lines;
 
     public LineModel() {
         lines = new ArrayList<>();
@@ -23,11 +23,11 @@ public class LineModel {
     }
 
     public Line getLastLine() {
-        return lines.get(lines.size() - 1);
+        return lines.getLast();
     }
 
     public Line getFirstLine() {
-        return lines.get(0);
+        return lines.getFirst();
     }
 
     public ArrayList<Point> getAsPoints() {
@@ -40,11 +40,11 @@ public class LineModel {
     }
 
     public Point getLastPoint() {
-        return lines.get(lines.size() - 1).getPoint2();
+        return lines.getLast().getPoint2();
     }
 
     public Point getFirstPoint() {
-        return lines.get(0).getPoint2();
+        return lines.getFirst().getPoint2();
     }
 
     public void clear() {

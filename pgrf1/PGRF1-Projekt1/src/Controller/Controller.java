@@ -6,23 +6,11 @@ import Model.Mode;
 import Model.LineModel;
 import Model.Point;
 
-import java.util.ArrayList;
-
 public class Controller {
-    private Model model;
-    private ArrayList<Observer<Polygon>> polygonObservers;
-    private ArrayList<Observer<Mode>> modeObservers;
-    private ArrayList<Observer<LineModel>> lineModelObservers;
-    private ArrayList<Observer<Point>> LastPointObservers;
-    private ArrayList<Observer<Point>> hoveredPointObservers;
+    private final Model model;
 
     public Controller(Model model) {
         this.model = model;
-        this.polygonObservers = new ArrayList<>();
-        this.modeObservers = new ArrayList<>();
-        this.lineModelObservers = new ArrayList<>();
-        this.LastPointObservers = new ArrayList<>();
-        this.hoveredPointObservers = new ArrayList<>();
     }
 
     public Polygon getPolygon() {
@@ -31,11 +19,6 @@ public class Controller {
 
     public void setPolygon(Polygon polygon) {
         model.setPolygon(polygon);
-        polygonObservers.forEach((observer) -> observer.update(polygon));
-    }
-
-    public void onPolygonUpdate(Observer observer) {
-        polygonObservers.add(observer);
     }
 
     public Mode getMode() {
@@ -44,10 +27,6 @@ public class Controller {
 
     public void setMode(Mode mode) {
         this.model.setMode(mode);
-        modeObservers.forEach((observer) -> observer.update(mode));
-    }
-    public void onModeUpdate(Observer observer) {
-        modeObservers.add(observer);
     }
 
     public LineModel getLineModel() {
@@ -56,11 +35,6 @@ public class Controller {
 
     public void setLineModel(LineModel lineModel) {
         model.setLineModel(lineModel);
-        lineModelObservers.forEach((observer) -> observer.update(lineModel));
-    }
-
-    public void onLineUpdate(Observer observer) {
-        lineModelObservers.add(observer);
     }
 
     public Point getLastPoint() {
@@ -69,11 +43,6 @@ public class Controller {
 
     public void setLastPoint(Point lastPoint) {
         model.setLastPoint(lastPoint);
-        LastPointObservers.forEach((observer) -> observer.update(lastPoint));
-    }
-
-    public void onLastPointUpdate(Observer observer) {
-        LastPointObservers.add(observer);
     }
 
     public Point getHoveredPoint() {
@@ -82,11 +51,6 @@ public class Controller {
 
     public void setHoveredPoint(Point hoveredPoint) {
         model.setHoveredPoint(hoveredPoint);
-        hoveredPointObservers.forEach((observer) -> observer.update(hoveredPoint));
-    }
-
-    public void onHoveredPointUpdate(Observer observer) {
-        hoveredPointObservers.add(observer);
     }
 
     public void switchMode() {
