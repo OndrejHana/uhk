@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PolygonController {
-    private Controller2D controller;
+    private final Controller2D controller;
 
     public PolygonController(Controller2D controller) {
         this.controller = controller;

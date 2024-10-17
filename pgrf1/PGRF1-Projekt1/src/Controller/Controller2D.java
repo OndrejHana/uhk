@@ -8,10 +8,10 @@ import Model.Line;
 import java.awt.*;
 
 public class Controller2D {
-    private Controller controller;
-    private LineRasterizer lineRasterizer;
-    private Panel panel;
-    private PolygonRasterizer polygonRasterizer;
+    private final Controller controller;
+    private final LineRasterizer lineRasterizer;
+    private final Panel panel;
+    private final PolygonRasterizer polygonRasterizer;
 
     public Controller2D(Controller controller, LineRasterizer lineRasterizer, PolygonRasterizer polygonRasterizer, Panel panel) {
         this.controller = controller;

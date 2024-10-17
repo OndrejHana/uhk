@@ -11,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LineController {
-    private Controller2D controller;
+    private final Controller2D controller;
     private int thickness = 1;
 
     public LineController(Controller2D controller) {

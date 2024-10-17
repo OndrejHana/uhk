@@ -22,6 +22,6 @@ public class Polygon {
     }
 
     public Point getLastPoint() {
-        return points.get(points.size() - 1);
+        return points.getLast();
     }
 }

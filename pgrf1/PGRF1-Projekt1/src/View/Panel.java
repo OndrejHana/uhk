@@ -11,7 +11,7 @@ import java.awt.*;
 public class Panel extends JPanel {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
-    private RasterBufferedImage rasterBufferedImage;
+    private final RasterBufferedImage rasterBufferedImage;
 
     public Panel() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
