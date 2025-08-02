@@ -1,0 +1,372 @@
+@prefix : <http://www.example.org/rejnoci#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+##################################################
+# Ontologie (meta informace)
+##################################################
+
+:RejnociOntology rdf:type owl:Ontology .
+
+##################################################
+# Doménové (primitive) třídy – minimálně 20
+##################################################
+
+:ChrupavcitáRyba rdf:type owl:Class .
+
+:Rejnok rdf:type owl:Class ;
+    rdfs:subClassOf :ChrupavcitáRyba ;
+    # Uzávěr vlastnosti: každý rejnok má právě 1 biotop
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasHabitat ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    # Uzávěr vlastnosti: rejnok může mít max. 1 velikost (dimenzí) specifikovanou
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSize ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
+:MořskýRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :Rejnok .
+
+:SladkovodníRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :Rejnok .
+
+:ReefRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:CoastalRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:DeepSeaRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:GiantRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:StripedRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:SpottedRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:BlueMarineRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok .
+
+:FreshwaterRay rdf:type owl:Class ;
+    rdfs:subClassOf :SladkovodníRejnok .
+
+:SmallFreshwaterRay rdf:type owl:Class ;
+    rdfs:subClassOf :SladkovodníRejnok .
+
+:ColorfulFreshwaterRay rdf:type owl:Class ;
+    rdfs:subClassOf :SladkovodníRejnok .
+
+:HybridRay rdf:type owl:Class ;
+    rdfs:subClassOf :Rejnok .
+
+##################################################
+# Definované třídy (min. 5) se specifikací omezení
+##################################################
+
+:MantaRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:intersectionOf ( 
+            :MořskýRejnok 
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasBodyType ;
+              owl:hasValue :Flattened
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasSize ;
+              owl:hasValue :Large
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasHabitat ;
+              owl:hasValue :Marine
+            ]
+        )
+    ] .
+
+:Stingray rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf ( 
+            :MořskýRejnok 
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasTailType ;
+              owl:hasValue :BarbedTail
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasHabitat ;
+              owl:hasValue :Marine
+            ]
+        )
+    ] .
+
+:ElectricRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf ( 
+            :MořskýRejnok 
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasBodyType ;
+              owl:hasValue :Robust
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasElectricAbility ;
+              owl:hasValue "true"^^xsd:boolean
+            ]
+        )
+    ] .
+
+:ElongatedFreshwaterRay rdf:type owl:Class ;
+    rdfs:subClassOf :SladkovodníRejnok ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf ( 
+            :SladkovodníRejnok 
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasBodyType ;
+              owl:hasValue :Elongated
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasSize ;
+              owl:hasValue :Medium
+            ]
+        )
+    ] .
+
+:LargeMarineRay rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf ( 
+            :MořskýRejnok 
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasSize ;
+              owl:hasValue :Large
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasHabitat ;
+              owl:hasValue :Marine
+            ]
+            [ rdf:type owl:Restriction ;
+              owl:onProperty :hasLifestyle ;
+              owl:hasValue :Migratory
+            ]
+        )
+    ] .
+
+##################################################
+# Přídavné (dimenzní) třídy – minimálně 5 (zde jich je 6)
+##################################################
+
+:BodyType rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :Flattened :Elongated :Robust )
+    ] .
+
+:TailType rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :WhipTail :BarbedTail :ShortTail )
+    ] .
+
+:Color rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :LightColor :DarkColor :BlueColor 
+                     :StripedColor :SpottedColor )
+    ] .
+
+:Size rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :Small :Medium :Large )
+    ] .
+
+:Lifestyle rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :Sedentary :Migratory :Nocturnal )
+    ] .
+
+:Habitat rdf:type owl:Class ;
+    owl:equivalentClass [ 
+        rdf:type owl:Class ;
+        owl:oneOf ( :Marine :Freshwater :Brackish )
+    ] .
+
+##################################################
+# Testovací třídy – alespoň 3
+##################################################
+
+:TestovaciTrida rdf:type owl:Class .
+
+:TestovaciKonzistentni1 rdf:type owl:Class ;
+    rdfs:subClassOf :TestovaciTrida ;
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasBodyType ;
+        owl:hasValue :Flattened
+    ] .
+
+:TestovaciKonzistentni2 rdf:type owl:Class ;
+    rdfs:subClassOf :TestovaciTrida ;
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasTailType ;
+        owl:hasValue :WhipTail
+    ] .
+
+:TestovaciNekonzistentni rdf:type owl:Class ;
+    rdfs:subClassOf :TestovaciTrida ;
+    # Nekonzistence – požaduje současně habitat Marine i Freshwater, které jsou disjunktní
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasHabitat ;
+        owl:hasValue :Marine
+    ] ,
+    rdfs:subClassOf [ 
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasHabitat ;
+        owl:hasValue :Freshwater
+    ] .
+
+##################################################
+# Objektové vlastnosti (min. 5) a jejich inverze
+##################################################
+
+:hasBodyType rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :BodyType .
+
+:bodyTypeOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasBodyType ;
+    rdfs:domain :BodyType ;
+    rdfs:range :Rejnok .
+
+:hasTailType rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :TailType .
+
+:tailTypeOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasTailType ;
+    rdfs:domain :TailType ;
+    rdfs:range :Rejnok .
+
+:hasColor rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :Color .
+
+:colorOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasColor ;
+    rdfs:domain :Color ;
+    rdfs:range :Rejnok .
+
+:hasSize rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :Size .
+
+:sizeOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasSize ;
+    rdfs:domain :Size ;
+    rdfs:range :Rejnok .
+
+:hasLifestyle rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :Lifestyle .
+
+:lifestyleOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasLifestyle ;
+    rdfs:domain :Lifestyle ;
+    rdfs:range :Rejnok .
+
+:hasHabitat rdf:type owl:ObjectProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range :Habitat .
+
+:habitatOf rdf:type owl:ObjectProperty ;
+    owl:inverseOf :hasHabitat ;
+    rdfs:domain :Habitat ;
+    rdfs:range :Rejnok .
+
+##################################################
+# Datatype vlastnost
+##################################################
+
+:hasElectricAbility rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Rejnok ;
+    rdfs:range xsd:boolean .
+
+##################################################
+# Jednotlivé instance dimenzních tříd
+##################################################
+
+# BodyType
+:Flattened rdf:type :BodyType .
+:Elongated rdf:type :BodyType .
+:Robust rdf:type :BodyType .
+
+# TailType
+:WhipTail rdf:type :TailType .
+:BarbedTail rdf:type :TailType .
+:ShortTail rdf:type :TailType .
+
+# Color
+:LightColor rdf:type :Color .
+:DarkColor rdf:type :Color .
+:BlueColor rdf:type :Color .
+:StripedColor rdf:type :Color .
+:SpottedColor rdf:type :Color .
+
+# Size
+:Small rdf:type :Size .
+:Medium rdf:type :Size .
+:Large rdf:type :Size .
+
+# Lifestyle
+:Sedentary rdf:type :Lifestyle .
+:Migratory rdf:type :Lifestyle .
+:Nocturnal rdf:type :Lifestyle .
+
+# Habitat – uzavřená množina (axiom pokrytí)
+:Marine rdf:type :Habitat .
+:Freshwater rdf:type :Habitat .
+:Brackish rdf:type :Habitat .
+
+# Disjunktnost habitatů
+:Marine owl:disjointWith :Freshwater .
+:Marine owl:disjointWith :Brackish .
+:Freshwater owl:disjointWith :Brackish .
+
+##################################################
+# Ukázkové instance rejnoků
+##################################################
+
+:MantaBirostris rdf:type :MantaRejnok ;
+    :hasBodyType :Flattened ;
+    :hasSize :Large ;
+    :hasHabitat :Marine ;
+    :hasTailType :WhipTail ;
+    :hasLifestyle :Migratory ;
+    :hasColor :LightColor .
+
+:SomeStingray rdf:type :Stingray ;
+    :hasTailType :BarbedTail ;
+    :hasHabitat :Marine ;
+    :hasColor :DarkColor ;
+    :hasSize :Medium ;
+    :hasBodyType :Flattened ;
+    :hasLifestyle :Sedentary .

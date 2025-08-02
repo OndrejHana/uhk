@@ -1,0 +1,274 @@
+#Univerzita Hradec KrÃ¡lovÃ© â€“ Fakulta informatiky a managementu
+#Martina HusÃ¡kovÃ¡: aktualizovÃ¡no 17.1.2024
+
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix movies: <http://www.semanticweb.org/husakova/2024/movies#> 
+
+<http://www.semanticweb.org/husakova/2024/movies#> rdfs:comment "Cviceni 05: SPARQL (1); uprava: M. Husakova, puvodni soubor: D. Ponce" .
+
+#################################################################
+#    Properties
+#################################################################
+
+#Tyto taxonomicke relace predpokladame samo sebou. 
+#Explicitne je nedeklarujeme.
+
+#rdf:type a rdf:Property.
+#rdfs:subClassOf a rdf:Property.
+#rdfs:subPropertyOf a rdf:Property.
+#rdfs:domain a rdf:Property.
+#rdfs:range a rdf:Property.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#created
+movies:created rdf:type rdf:Property ;
+               rdfs:domain movies:Person ;
+               rdfs:range movies:Art.
+
+###  http://www.semanticweb.org/husakova/2024/movies#composedMusicFor
+movies:composedMusicFor rdf:type rdf:Property ;
+                rdfs:subPropertyOf movies:created ;
+                rdfs:domain movies:Composer;
+                rdfs:range movies:Movie.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#directed
+movies:directed rdf:type rdf:Property ;
+                rdfs:subPropertyOf movies:created ;
+                rdfs:domain movies:MovieDirector ;
+                rdfs:range movies:Movie .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#wroteScriptFor
+movies:wroteScriptFor rdf:type rdf:Property ;
+             rdfs:subPropertyOf movies:created ;
+             rdfs:domain movies:Screenwriter;
+             rdfs:range movies:Movie.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#hasActor
+movies:hasActor rdf:type rdf:Property ;
+                rdfs:domain movies:Movie ;
+                rdfs:range movies:Actor .
+
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#hasGenre
+movies:hasGenre rdf:type rdf:Property ;
+                rdfs:domain movies:Movie ;
+                rdfs:range movies:Genre .
+
+
+#################################################################
+#    Properties having literals
+#################################################################
+
+###  http://www.semanticweb.org/husakova/2024/movies#birthYear
+movies:birthYear rdf:type rdf:Property ;
+                 rdfs:domain movies:Person ;
+                 rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#deathYear
+movies:deathYear rdf:type rdf:Property ;
+                 rdfs:domain movies:Person ;
+                 rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#duration
+movies:duration rdf:type rdf:Property ;
+                rdfs:domain movies:Movie ;
+                rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#gender
+movies:gender rdf:type rdf:Property ;
+              rdfs:domain movies:Person ;
+              rdfs:range rdf:PlainLiteral . ### untyped literal having language assigned
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/husakova/2024/movies#Art
+movies:Art rdf:type rdfs:Class .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Movie
+movies:Movie rdf:type rdfs:Class ;
+                rdfs:subClassOf movies:Art.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#Person
+movies:Person rdf:type rdfs:Class .
+
+###  http://www.semanticweb.org/husakova/2024/movies#MovieDirector
+movies:MovieDirector rdf:type rdfs:Class ;
+                     rdfs:subClassOf movies:Person .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Screenwriter
+movies:Screenwriter rdf:type rdfs:Class ;
+                     rdfs:subClassOf movies:Person .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Composer
+movies:Composer rdf:type rdfs:Class ;
+                rdfs:subClassOf movies:Person .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#Actor
+movies:Actor rdf:type rdfs:Class ;
+             rdfs:subClassOf movies:Person .
+
+###  http://www.semanticweb.org/husakova/2024/movies#AmateurActor
+movies:AmateurActor rdf:type rdfs:Class ;
+                    rdfs:subClassOf movies:Actor .
+
+###  http://www.semanticweb.org/husakova/2024/movies#TheatreActor
+movies:TheatreActor rdf:type rdfs:Class ;
+                    rdfs:subClassOf movies:Actor .
+
+
+### http://www.semanticweb.org/husakova/2024/movies#Genre
+movies:Genre rdf:type rdfs:Class .
+
+
+
+
+#################################################################
+#    Objects (Individuals)
+#################################################################
+
+###  http://www.semanticweb.org/husakova/2024/movies#ClintEastwood
+movies:ClintEastwood rdf:type movies:MovieDirector, movies:Composer, movies:Actor ;
+                   movies:directed movies:MillionDollarBaby ;
+                   movies:composedMusicFor movies:MillionDollarBaby;
+                   movies:birthYear "1930"^^xsd:int;
+                   movies:gender "Male"@en .
+
+###  http://www.semanticweb.org/husakova/2024/movies#MillionDollarBaby
+movies:MillionDollarBaby rdf:type movies:Movie ;
+                   movies:hasActor movies:ClintEastwood ;
+                   movies:duration "133"^^xsd:int ;
+                   movies:hasGenre movies:Drama.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#AlanJPakula
+movies:AlanJPakula rdf:type movies:MovieDirector ;
+                   movies:directed movies:ThePelikanBrief ;
+                   movies:deathYear "1998"^^xsd:int.
+
+
+### http://www.semanticweb.org/husakova/2024/movies#Comedy
+movies:Comedy rdf:type movies:Genre .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Mystery
+movies:Mystery rdf:type movies:Genre .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Drama
+movies:Drama rdf:type movies:Genre .
+
+###  http://www.semanticweb.org/husakova/2024/movies#Musical
+movies:Musical rdf:type movies:Genre .
+
+###  http://www.semanticweb.org/husakova/2024/movies#ScienceFiction
+movies:ScienceFiction rdf:type movies:Genre .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#DenzelWashington
+movies:DenzelWashington rdf:type movies:Actor, movies:MovieDirector ;
+                        movies:directed movies:Fences ;
+                        movies:birthYear "1954"^^xsd:int ;
+                        movies:gender "Male"@en .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#FastForward
+movies:FastForward rdf:type movies:Movie ;
+            movies:duration "110"^^xsd:int ;
+            movies:hasGenre movies:Musical.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#Fences
+movies:Fences rdf:type movies:Movie ;
+              movies:hasActor movies:DenzelWashington ;
+              movies:duration "150"^^xsd:int ;
+              movies:hasGenre movies:Drama.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#GhostDad
+movies:GhostDad rdf:type movies:Movie ;
+                movies:hasGenre movies:Comedy ;
+                movies:duration "83"^^xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#HankyPanky
+movies:HankyPanky rdf:type movies:Movie ;
+                  movies:hasGenre movies:Comedy ;
+                  movies:duration "110"^^xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#HarryAndSon
+movies:HarryAndSon rdf:type movies:Movie ;
+                   movies:hasActor movies:PaulNewman ;
+                   movies:duration "100"^^xsd:int ;
+                   movies:hasGenre movies:Drama.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#InTheHeatOfTheNight
+movies:InTheHeatOfTheNight rdf:type movies:Movie ;
+                           movies:hasGenre movies:Mystery ;
+                           movies:hasActor movies:SidneyPoitier ;
+                           movies:duration "105"^^xsd:int .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#JosefSebanek
+movies:JosefSebanek rdf:type movies:AmateurActor ;
+                    movies:gender "Male"@en .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#JuliaRoberts
+movies:JuliaRoberts rdf:type movies:Actor ;
+                    movies:gender "Female"@en .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#PaulNewman
+movies:PaulNewman rdf:type movies:Actor ;
+                  movies:directed movies:HarryAndSon ,
+                                  movies:TheGlassMenagerie ;
+                  movies:birthYear "1925"^^xsd:int ;
+                  movies:deathYear "2008"^^xsd:int ;
+                  movies:gender "Male"@en .
+
+
+### http://www.semanticweb.org/husakova/2024/movies#SarahBernhardt
+movies:SarahBernhardt rdf:type movies:TheatreActor ;
+                      movies:gender "Female"@en .
+
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#SidneyPoitier
+movies:SidneyPoitier rdf:type movies:Actor, movies:MovieDirector ;
+                     movies:directed movies:FastForward ,
+                                     movies:GhostDad ,
+                                     movies:HankyPanky ;
+                     movies:birthYear "1927"^^xsd:int ;
+                     movies:deathYear "2022"^^xsd:int ;
+                     movies:gender "Male"@en .
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#TheGlassMenagerie
+movies:TheGlassMenagerie rdf:type movies:Movie ;
+                        movies:duration "134"^^xsd:int ;
+                        movies:hasGenre movies:Drama.
+
+
+###  http://www.semanticweb.org/husakova/2024/movies#ThePelikanBrief
+movies:ThePelikanBrief rdf:type movies:Movie ;
+                       movies:hasGenre movies:Mystery ;
+                       movies:duration "136"^^xsd:int ;
+                       movies:hasActor movies:DenzelWashington ,
+                                       movies:JuliaRoberts .
+
+
+

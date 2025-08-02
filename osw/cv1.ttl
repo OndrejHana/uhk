@@ -1,0 +1,21 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> # The RDF Concepts Vocabulary (RDF)
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> # XML Schema Definition
+
+prefix m: <http://semanticweb.cz/hana/movies#>
+
+m:MillionDollarBaby rdf:type m:Movie;
+    m:hasActor m:ClintEastwood, m:HilarySwank;
+    m:duration "PT133"^^xsd:duration;
+    m:hasGenre m:Drama.
+
+m:ClintEastwood rdf:type m:Actor, m:Composer, m:MovieDirector;
+    m:directed m:MillionDollarBaby;
+    m:playedIn m:MillionDollarBaby;
+    m:composedMusicFor m:MillionDollarBaby;
+    m:birthYear "1930"^^xsd:gYear;
+    m:gender "Male"@en.
+
+m:HilarySwank rdf:type m:Actor;
+    m:birthYear "1974"^^xsd:gYear;
+    m:gender "Female"@en;
+    m:playedIn m:MillionDollarBaby.

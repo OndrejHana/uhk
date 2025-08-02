@@ -1,0 +1,135 @@
+@prefix : <http://www.example.org/rejnoci#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ##################################################
+# # Třídy
+# ##################################################
+
+# # Obecná třída Rejnok
+:Rejnok rdf:type owl:Class .
+
+# Podtřídy rejnoků podle biotopu
+:MořskýRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :Rejnok .
+
+:SladkovodníRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :Rejnok .
+
+# Specifické skupiny rejnoků
+:MantaRejnok rdf:type owl:Class ;
+    rdfs:subClassOf :MořskýRejnok ;
+    # Omezení: manta rejnoci mají ploché tělo, jsou velcí a vyskytují se v moři.
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasBodyType ;
+        owl:hasValue :Flattened
+    ] ,
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSize ;
+        owl:hasValue :Large
+    ] ,
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasHabitat ;
+        owl:hasValue :Marine
+    ] .
+
+# :Stingray rdf:type owl:Class ;
+#     rdfs:subClassOf :MořskýRejnok ;
+#     # Omezení: rejnoci s oštro-hřbetním (barbed) ocasem.
+#     rdfs:subClassOf [
+#         rdf:type owl:Restriction ;
+#         owl:onProperty :hasTailType ;
+#         owl:hasValue :BarbedTail
+#     ] .
+
+# ##################################################
+# # Třídy pro charakteristiky
+# ##################################################
+
+# :BodyType rdf:type owl:Class .
+# :TailType rdf:type owl:Class .
+# :Size rdf:type owl:Class .
+# :Lifestyle rdf:type owl:Class .
+# :Habitat rdf:type owl:Class .
+
+# ##################################################
+# # Jednotlivé vlastnosti (objektové vlastnosti)
+# ##################################################
+
+# :hasBodyType rdf:type owl:ObjectProperty ;
+#     rdfs:domain :Rejnok ;
+#     rdfs:range :BodyType .
+
+# :hasTailType rdf:type owl:ObjectProperty ;
+#     rdfs:domain :Rejnok ;
+#     rdfs:range :TailType .
+
+# :hasSize rdf:type owl:ObjectProperty ;
+#     rdfs:domain :Rejnok ;
+#     rdfs:range :Size .
+
+# :hasLifestyle rdf:type owl:ObjectProperty ;
+#     rdfs:domain :Rejnok ;
+#     rdfs:range :Lifestyle .
+
+# :hasHabitat rdf:type owl:ObjectProperty ;
+#     rdfs:domain :Rejnok ;
+#     rdfs:range :Habitat .
+
+# ##################################################
+# # Jednotlivé charakteristiky (instance)
+# ##################################################
+
+# # Tvar těla
+# :Flattened rdf:type :BodyType .
+# :Elongated rdf:type :BodyType .
+
+# # Typ ocasu
+# :WhipTail rdf:type :TailType .
+# :BarbedTail rdf:type :TailType .
+
+# # Velikost
+# :Small rdf:type :Size .
+# :Medium rdf:type :Size .
+# :Large rdf:type :Size .
+
+# # Způsob života
+# :Sedentary rdf:type :Lifestyle .
+# :Migratory rdf:type :Lifestyle .
+
+# # Biotop
+# :Marine rdf:type :Habitat .
+# :Freshwater rdf:type :Habitat .
+
+# ##################################################
+# # Instance rejnoků
+# ##################################################
+
+# # Instance manta rejnoka
+# :MantaBirostris rdf:type :MantaRejnok ;
+#     :hasBodyType :Flattened ;
+#     :hasSize :Large ;
+#     :hasHabitat :Marine ;
+#     :hasTailType :WhipTail ;
+#     :hasLifestyle :Migratory .
+
+# # Instance sladkovodního rejnoka (ilustrativně)
+# :FreshWaterRay rdf:type :SladkovodníRejnok ;
+#     :hasBodyType :Elongated ;
+#     :hasSize :Small ;
+#     :hasHabitat :Freshwater ;
+#     :hasTailType :WhipTail ;
+#     :hasLifestyle :Sedentary .
+
+# # Instance rejnoka s barbed ocasem (stingray)
+# :SomeStingray rdf:type :Stingray ;
+#     :hasBodyType :Flattened ;
+#     :hasSize :Medium ;
+#     :hasHabitat :Marine ;
+#     :hasTailType :BarbedTail ;
+#     :hasLifestyle :Sedentary .

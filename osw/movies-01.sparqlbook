@@ -1,0 +1,20 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nprefix xsd: <http://www.w3.org/2001/XMLSchema#> \nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nprefix movies: <http://www.semanticweb.org/husakova/2024/movies#> \n\nSELECT ?movie WHERE {\n    movies:Movie rdf:type ?movie.\n\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nprefix xsd: <http://www.w3.org/2001/XMLSchema#> \nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nprefix movies: <http://www.semanticweb.org/husakova/2024/movies#> \n\nSELECT * WHERE {\n    ?rejza rdf:type movies:MovieDirector.\n    ?rejza movies:birthYear ?birthYear.\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \nprefix xsd: <http://www.w3.org/2001/XMLSchema#> \nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nprefix movies: <http://www.semanticweb.org/husakova/2024/movies#> \n\nSELECT *\nWHERE {\n    ?movieDirector rdf:type movies:MovieDirector.\n    OPTIONAL {?movieDirector movies:birthYear ?birthYear.}\n}",
+    "metadata": {}
+  }
+]
